@@ -139,7 +139,6 @@ class Webportal:
         resp = self.__hit(
             "POST", API + pretoken_endpoint, data=payload, exception=LoginError
         )
-
         payload = resp["response"]
         payload.pop("rejectedData")
 
