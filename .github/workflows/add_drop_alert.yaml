@@ -29,6 +29,9 @@ jobs:
 
     - name: Send Telegram alert
       id: message
+      env:
+        JIIT_USERNAME: ${{ secrets.JIIT_USERNAME }}
+        JIIT_PASSWORD: ${{ secrets.JIIT_PASSWORD }}
       run: |
         MESSAGE=$(uv run portal.py)
         echo "message=$MESSAGE" >> $GITHUB_OUTPUT
