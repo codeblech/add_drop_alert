@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from enum import Enum
 from pprint import pprint
 
-load_dotenv()
+# load_dotenv()
 
 
 class Status(Enum):

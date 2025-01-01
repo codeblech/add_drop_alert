@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from pprint import pprint
 
 
-load_dotenv()
+# load_dotenv()
 
 closed_payload = {
     "messaging_product": "whatsapp",

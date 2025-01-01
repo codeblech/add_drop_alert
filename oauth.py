@@ -10,7 +10,7 @@ import lxml.html
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
+# load_dotenv()
 
 GOOGLE_ACCOUNTS_BASE_URL = "https://accounts.google.com"
 REDIRECT_URI = "urn:ietf:wg:oauth:2.0:oob"

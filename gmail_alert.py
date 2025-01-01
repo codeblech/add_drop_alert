@@ -4,7 +4,7 @@ import yagmail
 from portal import Status, get_add_drop_endpoint_status
 from pprint import pprint
 
-load_dotenv()
+# load_dotenv()
 
 from_email = os.getenv("FROM_EMAIL")
 to_email = os.getenv("TO_EMAIL")
