@@ -48,4 +48,4 @@ The `pyjiit.wrapper.WebPortal.__hit()` method is modified to not raise an error 
 
 
 ## Future
-Email and Telegram alerts.
+Email and WhatsApp alerts.
