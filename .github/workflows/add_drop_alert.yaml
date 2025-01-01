@@ -3,7 +3,7 @@ name: Add Drop Alert
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 * * * *'
+    - cron: '15 * * * *'
 
 jobs:
   whatsapp-job:
