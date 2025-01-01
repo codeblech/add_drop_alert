@@ -1,8 +1,8 @@
 ## What
-Alert for the time when the add-drop elective option is opened up on the JIIT WebPortal
+Pings an alert through telegram the moment the add-drop elective option is activated on the JIIT WebPortal.
 
 ## Why
-So, we can drop our shitty electives as fast as possible.
+So, we can drop our shitty electives as fast as possible. Electives are exchanged on a first come first serve basis so the sooner we request subjects of our choice the higher our chance of getting them.
 
 ## Steps to recreate
 
@@ -19,11 +19,12 @@ Telegram is GOAT. \
 
 
 ### Gmail
-Oauth tokens need to be saved in each workflow run for the subsequent runs. I haven't implemented that yet.
+Oauth tokens need to be saved in each workflow run for the subsequent runs. We haven't implemented that yet.
 
 
 ### Whatsapp
-Whatsapp doesn't work right now through Github actions because the API access is shit.
+Why use whatsapp tho?
+Whatsapp doesn't work right now through Github actions because their API access is very developer unfriendly.
 
 <del>
 1. Follow the steps [here](https://developers.facebook.com/docs/whatsapp/cloud-api/get-started) and create all the meta and FaceBook accounts needed to interact with WhatsApp programatically.
@@ -42,7 +43,7 @@ PHONE_NUMBER="xxx"
 </del>
 
 ## Note
-This project uses a slightly modified version of [pyjiit](https://github.com/codelif/pyjiit)
+This project uses a very tinie-mini modified version of [pyjiit](https://github.com/codelif/pyjiit)
 
 The `pyjiit.wrapper.WebPortal.__hit()` method is modified to not raise an error on the failure response by the server. Failure response implies add drop option is not available.
 
