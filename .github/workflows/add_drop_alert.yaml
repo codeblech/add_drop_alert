@@ -29,6 +29,11 @@ jobs:
     - name: Install the project
       run: uv sync --all-extras --dev
 
+    - name: Run whatsapp alert script
+      env:
+        WHATSAPP_ACCESS_TOKEN: ${{ secrets.WHATSAPP_ACCESS_TOKEN }}
+      run:
+        uv run whatsapp_alert.py
 
     - name: Run gmail alert script
       env:
