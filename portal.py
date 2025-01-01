@@ -3,19 +3,23 @@ from pyjiit.wrapper import API
 from pyjiit.default import CAPTCHA
 import os
 from dotenv import load_dotenv
+from enum import Enum
 
 load_dotenv()
 
 
-def main():
+class Status(Enum):
+    OPEN = "open"
+    CLOSED = "closed"
+
+
+def get_add_drop_endpoint_status():
 
     ENDPOINT = "/addDropSubjectRequest/getStudentInfo"
 
     w = Webportal()
-    USERNAME = os.getenv("LOGIN_USERNAME")
-    PASSWORD = os.getenv("PASSWORD")
-    print(USERNAME)
-    print(PASSWORD)
+    USERNAME = os.getenv("JIIT_USERNAME")
+    PASSWORD = os.getenv("JIIT_PASSWORD")
 
     w.student_login(USERNAME, PASSWORD, CAPTCHA)
     PAYLOAD = {
@@ -24,7 +28,9 @@ def main():
     }
     resp = w._Webportal__hit("POST", API + ENDPOINT, json=PAYLOAD, authenticated=True)
     print(resp["status"]["responseStatus"])
+    print('"Failure" means add drop is not open')
+    return resp["status"]["responseStatus"]  # 'Failure' if add drop is not open
 
 
 if __name__ == "__main__":
-    main()
+    print(get_add_drop_endpoint_status())
