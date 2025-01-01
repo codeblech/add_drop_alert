@@ -33,7 +33,7 @@ jobs:
         JIIT_USERNAME: ${{ secrets.JIIT_USERNAME }}
         JIIT_PASSWORD: ${{ secrets.JIIT_PASSWORD }}
       run: |
-        uv portal.py > message.txt
+        uv run portal.py > message.txt
         echo "::set-output name=message::$(cat message.txt)"
 
     - name: send telegram message on push
