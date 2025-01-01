@@ -29,51 +29,53 @@ jobs:
 
     - name: Run whatsapp alert script
       env:
+        JIIT_USERNAME: ${{ secrets.JIIT_USERNAME }}
+        JIIT_PASSWORD: ${{ secrets.JIIT_PASSWORD }}
         WHATSAPP_ACCESS_TOKEN: ${{ secrets.WHATSAPP_ACCESS_TOKEN }}
       run:
         uv run whatsapp_alert.py
 
-  gmail-job:
-    runs-on: ubuntu-latest
-    needs: whatsapp-job
-    steps:
-    - name: Run gmail alert script
-      env:
-        FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
-        TO_EMAIL: ${{ secrets.TO_EMAIL }}
-        GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-        GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-        JIIT_USERNAME: ${{ secrets.JIIT_USERNAME }}
-        JIIT_PASSWORD: ${{ secrets.JIIT_PASSWORD }}
-        OAUTH2_CREDS: ${{ secrets.OAUTH2_CREDS }}
-      run: |
-        echo "$OAUTH2_CREDS" > ~/oauth2_creds.json
-        uv run gmail_alert.py
+  # gmail-job:
+  #   runs-on: ubuntu-latest
+  #   needs: whatsapp-job
+  #   steps:
+  #   - name: Run gmail alert script
+  #     env:
+  #       FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
+  #       TO_EMAIL: ${{ secrets.TO_EMAIL }}
+  #       GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+  #       GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+  #       JIIT_USERNAME: ${{ secrets.JIIT_USERNAME }}
+  #       JIIT_PASSWORD: ${{ secrets.JIIT_PASSWORD }}
+  #       OAUTH2_CREDS: ${{ secrets.OAUTH2_CREDS }}
+  #     run: |
+  #       echo "$OAUTH2_CREDS" > ~/oauth2_creds.json
+  #       uv run gmail_alert.py
 
 # update the secrets after running the script. no need to update at the beginning,
 # because the very first job is initialised with latest secrets set manually.
 # subsequent runs save latest secrets at the end of running everything.
-    - name: Generate minified OAUTH2_CREDS
-      run: cat ~/oauth2_creds.json | jq -c . > minified_oauth2_creds.json
+  #   - name: Generate minified OAUTH2_CREDS
+  #     run: cat ~/oauth2_creds.json | jq -c . > minified_oauth2_creds.json
 
-  update-secrets:
-    runs-on: ubuntu-latest
-    needs: gmail-job
-    permissions:
-      id-token: write
+  # update-secrets:
+  #   runs-on: ubuntu-latest
+  #   needs: gmail-job
+  #   permissions:
+  #     id-token: write
 
-    steps:
-    - uses: qoomon/actions--access-token@v3
-      id: access-token
-      with:
-        permissions: |
-            secrets: write
+  #   steps:
+  #   - uses: qoomon/actions--access-token@v3
+  #     id: access-token
+  #     with:
+  #       permissions: |
+  #           secrets: write
 
-    - name: Update secret
-      run: >-
-        gh secret
-        set 'OAUTH2_CREDS'
-        --body "$(cat minified_oauth2_creds.json)"
-        --repo ${{ github.repository }}
-      env:
-        GITHUB_TOKEN: ${{ steps.access-token.outputs.token }}
+  #   - name: Update secret
+  #     run: >-
+  #       gh secret
+  #       set 'OAUTH2_CREDS'
+  #       --body "$(cat minified_oauth2_creds.json)"
+  #       --repo ${{ github.repository }}
+  #     env:
+  #       GITHUB_TOKEN: ${{ steps.access-token.outputs.token }}
