@@ -35,6 +35,7 @@ jobs:
       run: |
         uv run portal.py > message.txt
         echo "::set-output name=message::$(cat message.txt)"
+        echo "message=$(cat message.txt)" >> $GITHUB_OUTPUT
 
     - name: send telegram message on push
       uses: appleboy/telegram-action@master
