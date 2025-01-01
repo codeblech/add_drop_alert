@@ -5,11 +5,13 @@ from dotenv import load_dotenv
 from pprint import pprint
 
 
-# load_dotenv()
+load_dotenv()
+
+phone_number = os.getenv("PHONE_NUMBER")
 
 closed_payload = {
     "messaging_product": "whatsapp",
-    "to": "919997703037",
+    "to": phone_number,
     "type": "template",
     "template": {
         "namespace": "cfc2b7b0_627c_4b43_ad0a_fa24d6117735",
@@ -20,7 +22,7 @@ closed_payload = {
 
 open_payload = {
     "messaging_product": "whatsapp",
-    "to": "919997703037",
+    "to": phone_number,
     "type": "template",
     "template": {
         "namespace": "cfc2b7b0_627c_4b43_ad0a_fa24d6117735",
@@ -31,7 +33,7 @@ open_payload = {
 
 default_template = {
     "messaging_product": "whatsapp",
-    "to": "919997703037",
+    "to": phone_number,
     "type": "template",
     "template": {"name": "hello_world", "language": {"code": "en_US"}},
 }
