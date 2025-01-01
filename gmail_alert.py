@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 import yagmail
 from portal import Status, get_add_drop_endpoint_status
-
+from pprint import pprint
 
 load_dotenv()
 
@@ -29,15 +29,15 @@ def send_email(status: Status):
 
 
 def main():
-    print("start")
+    pprint("start")
     add_drop_status = get_add_drop_endpoint_status()
     if add_drop_status == "Failure":
-        print("sending add drop closed email")
+        pprint("sending add drop closed email")
         send_email(status=Status.CLOSED)
     else:
-        print("sending add drop open email")
+        pprint("sending add drop open email")
         send_email(status=Status.OPEN)
-    print("email sent")
+    pprint("email sent")
 
 
 if __name__ == "__main__":

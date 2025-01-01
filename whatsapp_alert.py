@@ -2,7 +2,7 @@ from portal import get_add_drop_endpoint_status, Status
 import requests
 import os
 from dotenv import load_dotenv
-from pprint import print
+from pprint import pprint
 
 
 load_dotenv()
@@ -51,8 +51,8 @@ def send_whatsapp_message(status: Status):
         headers=headers,
         json=payload,
     )
-    print("Response from Whatsapp API:")
-    print(response.text)
+    pprint("Response from Whatsapp API:")
+    pprint(response.text)
 
 
 def main():

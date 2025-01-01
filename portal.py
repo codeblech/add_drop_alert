@@ -4,6 +4,7 @@ from pyjiit.default import CAPTCHA
 import os
 from dotenv import load_dotenv
 from enum import Enum
+from pprint import pprint
 
 load_dotenv()
 
@@ -27,10 +28,10 @@ def get_add_drop_endpoint_status():
         "bypassValue": "XuVHxhCQsRmMyK7cUdFClQ==",
     }
     resp = w._Webportal__hit("POST", API + ENDPOINT, json=PAYLOAD, authenticated=True)
-    print(resp["status"]["responseStatus"])
-    print('"Failure" means add drop is not open')
+    pprint(resp["status"]["responseStatus"])
+    pprint('"Failure" means add drop is not open')
     return resp["status"]["responseStatus"]  # 'Failure' if add drop is not open
 
 
 if __name__ == "__main__":
-    print(get_add_drop_endpoint_status())
+    pprint(get_add_drop_endpoint_status())
