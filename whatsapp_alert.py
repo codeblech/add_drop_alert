@@ -7,21 +7,26 @@ from pprint import pprint
 
 load_dotenv()
 
-closed_template_name = "add_drop_closed"
-opened_template_name = "add_drop_open_now"
-
 closed_payload = {
     "messaging_product": "whatsapp",
     "to": "919997703037",
     "type": "template",
-    "template": {"name": closed_template_name, "language": {"code": "en_US"}},
+    "template": {
+        "namespace": "cfc2b7b0_627c_4b43_ad0a_fa24d6117735",
+        "name": "add_drop_closed",
+        "language": {"code": "en"},
+    },
 }
 
 open_payload = {
     "messaging_product": "whatsapp",
     "to": "919997703037",
     "type": "template",
-    "template": {"name": opened_template_name, "language": {"code": "en_US"}},
+    "template": {
+        "namespace": "cfc2b7b0_627c_4b43_ad0a_fa24d6117735",
+        "name": "add_drop_open_now",
+        "language": {"code": "en"},
+    },
 }
 
 default_template = {
@@ -40,7 +45,7 @@ def send_whatsapp_message(status: Status):
     if status == Status.OPEN:
         payload = open_payload
     elif status == Status.CLOSED:
-        payload - closed_payload
+        payload = closed_payload
     else:
         raise ValueError(
             f"Invalid status: {status}. Expected Status.OPEN or Status.CLOSED."
