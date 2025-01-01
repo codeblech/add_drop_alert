@@ -7,7 +7,8 @@ So, we can drop our shitty electives as fast as possible.
 ## Steps to recreate
 
 ### Telegram
-Telegram is GOAT.
+Telegram is GOAT. \
+<img src=https://github.com/user-attachments/assets/68461f8c-fb0c-404e-b3a0-2a0ccb81548b width=400>
 
 1. Fork this repo
 2. Follow the instructions [here](https://v2.openhab.org/addons/actions/telegram/#prerequisites) in the Prerequisites section.
