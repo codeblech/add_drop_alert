@@ -1,12 +1,12 @@
-### What
+## What
 Alert for the time when the add-drop elective option is opened up on the JIIT WebPortal
 
-### Why
+## Why
 So, we can drop our shitty electives as fast as possible.
 
-### Steps to recreate
+## Steps to recreate
 
-#### Telegram
+### Telegram
 Telegram is GOAT.
 
 1. Fork this repo
@@ -17,11 +17,11 @@ Telegram is GOAT.
 6. Adjust the cron timing in the workflow file. (Optional)
 
 
-#### Gmail
+### Gmail
 Oauth tokens need to be saved in each workflow run for the subsequent runs. I haven't implemented that yet.
 
 
-#### Whatsapp
+### Whatsapp
 Whatsapp doesn't work right now through Github actions because the API access is shit.
 
 <del>
@@ -40,11 +40,11 @@ PHONE_NUMBER="xxx"
 7. Modify the `.github/workflows/add_drop_alert.yaml` according to your needs. By default, alerts are sent every 30 minutes.
 </del>
 
-### Note
+## Note
 This project uses a slightly modified version of [pyjiit](https://github.com/codelif/pyjiit)
 
 The `pyjiit.wrapper.WebPortal.__hit()` method is modified to not raise an error on the failure response by the server. Failure response implies add drop option is not available.
 
 
-### Future
+## Future
 Email and Telegram alerts.
