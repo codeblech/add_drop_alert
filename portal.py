@@ -27,9 +27,11 @@ def get_add_drop_endpoint_status():
         "bypassValue": "XuVHxhCQsRmMyK7cUdFClQ==",
     }
     resp = w._Webportal__hit("POST", API + ENDPOINT, json=PAYLOAD, authenticated=True)
-    print(resp["status"]["responseStatus"])
-    return resp["status"]["responseStatus"]  # 'Failure' if add drop is not open
+    response_status = resp["status"]["responseStatus"]
+    if response_status == "Failure":
+        return Status.CLOSED.value
+    return Status.OPEN.value
 
 
 if __name__ == "__main__":
-    get_add_drop_endpoint_status()
+    print(get_add_drop_endpoint_status())
