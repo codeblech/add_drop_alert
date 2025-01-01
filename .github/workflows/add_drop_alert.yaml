@@ -6,7 +6,7 @@ on:
     - cron: '15 * * * *'
 
 jobs:
-  whatsapp-job:
+  telegram-job:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,13 +27,48 @@ jobs:
     - name: Install the project
       run: uv sync --all-extras --dev
 
-    - name: Run whatsapp alert script
-      env:
-        JIIT_USERNAME: ${{ secrets.JIIT_USERNAME }}
-        JIIT_PASSWORD: ${{ secrets.JIIT_PASSWORD }}
-        WHATSAPP_ACCESS_TOKEN: ${{ secrets.WHATSAPP_ACCESS_TOKEN }}
-      run:
-        uv run whatsapp_alert.py
+    - name: Send Telegram alert
+      id: message
+      run: |
+        MESSAGE=$(uv run portal.py)
+        echo "message=$MESSAGE" >> $GITHUB_OUTPUT
+
+    - name: send telegram message on push
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_BOT_CHAT_ID }}
+        token: ${{ secrets.TELEGRAM_BOT_ACCESS_TOKEN }}
+        message: |
+          ${{ steps.message.outputs.message }}
+
+  # whatsapp-job:
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v4
+
+  #   - name: Install uv
+  #     uses: astral-sh/setup-uv@v5
+  #     with:
+  #       enable-cache: true
+  #       cache-dependency-glob: "uv.lock"
+
+  #   - name: Setup Python
+  #     uses: actions/setup-python@v5
+  #     with:
+  #       python-version-file: ".python-version"
+
+  #   - name: Install the project
+  #     run: uv sync --all-extras --dev
+
+  #   - name: Run whatsapp alert script
+  #     env:
+  #       JIIT_USERNAME: ${{ secrets.JIIT_USERNAME }}
+  #       JIIT_PASSWORD: ${{ secrets.JIIT_PASSWORD }}
+  #       WHATSAPP_ACCESS_TOKEN: ${{ secrets.WHATSAPP_ACCESS_TOKEN }}
+  #     run:
+  #       uv run whatsapp_alert.py
 
   # gmail-job:
   #   runs-on: ubuntu-latest
