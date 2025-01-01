@@ -33,16 +33,15 @@ jobs:
         JIIT_USERNAME: ${{ secrets.JIIT_USERNAME }}
         JIIT_PASSWORD: ${{ secrets.JIIT_PASSWORD }}
       run: |
-        MESSAGE=$(uv run portal.py)
-        echo "message=$MESSAGE" >> $GITHUB_OUTPUT
+        uv portal.py > message.txt
+        echo "::set-output name=message::$(cat message.txt)"
 
     - name: send telegram message on push
       uses: appleboy/telegram-action@master
       with:
         to: ${{ secrets.TELEGRAM_BOT_CHAT_ID }}
         token: ${{ secrets.TELEGRAM_BOT_ACCESS_TOKEN }}
-        message: |
-          ${{ steps.message.outputs.message }}
+        message: ${{ steps.message.outputs.message }}
 
   # whatsapp-job:
   #   runs-on: ubuntu-latest
