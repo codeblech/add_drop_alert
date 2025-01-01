@@ -8,15 +8,16 @@ on:
 jobs:
   whatsapp-job:
     runs-on: ubuntu-latest
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
     - name: Install uv
       uses: astral-sh/setup-uv@v5
-      with:
-        enable-cache: true
-        cache-dependency-glob: "uv.lock"
+      # with:
+      #   enable-cache: true
+      #   cache-dependency-glob: "uv.lock"
 
     - name: Setup Python
       uses: actions/setup-python@v5
