@@ -40,7 +40,7 @@ jobs:
         JIIT_PASSWORD: ${{ secrets.JIIT_PASSWORD }}
         OAUTH2_CREDS: ${{ secrets.OAUTH2_CREDS }}
       run: |
-        echo "$OAUTH2_CREDS" > "~/oauth2_creds.json"
+        echo "$OAUTH2_CREDS" > ~/oauth2_creds.json
         uv run gmail_alert.py
 
 # update the secrets after running the script. no need to update at the beginning,
